@@ -2,6 +2,16 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Run: Open Chess in Browser",
+      "type": "shell",
+      "command": "Start-Process index.html",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "Git: Status",
       "type": "shell",
       "command": "git status --short --branch",
