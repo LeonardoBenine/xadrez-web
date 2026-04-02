@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xadrez Simples</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <p class="eyebrow">Jogue no navegador</p>
+      <h1>Xadrez V2</h1>
+      <p class="description">
+        Clique em uma peca e depois na casa de destino. Esta versao tem movimento
+        valido das pecas, captura, promocao de peao para rainha, desfazer e animacao de jogadas.
+      </p>
+
+      <div class="status-card">
+        <p id="turn-label" class="status-title">Vez das brancas</p>
+        <p id="status-message" class="status-message">Selecione uma peca para comecar.</p>
+      </div>
+
+      <div class="actions">
+        <button id="reset-button" type="button">Reiniciar partida</button>
+        <button id="undo-button" type="button" class="secondary">Desfazer lance</button>
+      </div>
+
+      <div class="capture-grid">
+        <section class="capture-card">
+          <h2>Pretas capturadas</h2>
+          <div id="captured-black" class="captured-list" aria-label="Pecas pretas capturadas"></div>
+        </section>
+        <section class="capture-card">
+          <h2>Brancas capturadas</h2>
+          <div id="captured-white" class="captured-list" aria-label="Pecas brancas capturadas"></div>
+        </section>
+      </div>
+
+      <ul class="notes">
+        <li>Movimentos especiais como roque e en passant nao estao incluidos.</li>
+        <li>O rei pode ser capturado nesta versao simplificada.</li>
+      </ul>
+    </section>
+
+    <section class="board-section">
+      <div class="board-shell">
+        <div id="board" class="board" aria-label="Tabuleiro de xadrez"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

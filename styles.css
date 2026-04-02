@@ -1,0 +1,339 @@
+:root {
+  --bg-1: #f6efe3;
+  --bg-2: #ecd8bf;
+  --panel: rgba(255, 248, 238, 0.92);
+  --ink: #271c15;
+  --muted: #66574d;
+  --accent: #97491f;
+  --accent-deep: #6f3315;
+  --light-square: #e8d6bb;
+  --dark-square: #a1734e;
+  --selected: #ffd666;
+  --move: #5fba71;
+  --capture: #d65e5e;
+  --last-from: rgba(255, 214, 102, 0.66);
+  --last-to: rgba(95, 186, 113, 0.58);
+  --shadow: 0 24px 50px rgba(39, 28, 21, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%, #fff6ea 0%, transparent 38%),
+    radial-gradient(circle at 84% 88%, #f3e2ce 0%, transparent 32%),
+    linear-gradient(130deg, var(--bg-1) 0%, var(--bg-2) 58%, #e4cfb3 100%);
+}
+
+.app {
+  width: min(1160px, calc(100% - 30px));
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 28px 0;
+}
+
+.panel,
+.board-shell {
+  background: var(--panel);
+  border: 1px solid rgba(39, 28, 21, 0.12);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.panel {
+  border-radius: 24px;
+  padding: 26px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 0.98;
+}
+
+.description {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.status-card {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(151, 73, 31, 0.22);
+  background: linear-gradient(180deg, #fff 0%, #fbf0e2 100%);
+}
+
+.status-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.status-message {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #b15627 0%, var(--accent-deep) 100%);
+  color: #fff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  box-shadow: 0 12px 22px rgba(151, 73, 31, 0.25);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button.secondary {
+  background: linear-gradient(135deg, #6f503c 0%, #4f382a 100%);
+  box-shadow: 0 12px 22px rgba(79, 56, 42, 0.24);
+}
+
+.capture-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.capture-card {
+  border: 1px solid rgba(39, 28, 21, 0.1);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.capture-card h2 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.captured-list {
+  min-height: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.captured-list .piece-svg {
+  width: 30px;
+  height: 30px;
+}
+
+.notes {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.board-section {
+  display: flex;
+  justify-content: center;
+}
+
+.board-shell {
+  border-radius: 0;
+  padding: 16px;
+}
+
+.board {
+  width: min(88vw, 680px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 8px solid #68472e;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px rgba(255, 248, 238, 0.45);
+}
+
+.square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  transform: none;
+}
+
+.square:hover,
+.square:active {
+  transform: none;
+}
+
+.square.light {
+  background: var(--light-square);
+}
+
+.square.dark {
+  background: var(--dark-square);
+}
+
+.square.selected {
+  box-shadow: inset 0 0 0 4px var(--selected);
+}
+
+.square.last-from {
+  box-shadow: inset 0 0 0 999px var(--last-from);
+}
+
+.square.last-to {
+  box-shadow: inset 0 0 0 999px var(--last-to);
+}
+
+.square.valid-move::after,
+.square.capture-move::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.square.valid-move::after {
+  width: 24%;
+  height: 24%;
+  border-radius: 999px;
+  background: rgba(95, 186, 113, 0.94);
+}
+
+.square.capture-move::after {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border: 4px solid rgba(214, 94, 94, 0.94);
+}
+
+.square-label {
+  position: absolute;
+  left: 8px;
+  bottom: 5px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  opacity: 0.66;
+  color: rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+}
+
+.square.light .square-label {
+  color: rgba(39, 28, 21, 0.55);
+}
+
+.piece-svg {
+  width: 74%;
+  height: 74%;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.22));
+  transform-origin: center;
+}
+
+.piece-svg text {
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols2", "DejaVu Sans", "Arial Unicode MS", serif;
+  font-weight: 400;
+}
+
+.piece-moving {
+  animation: piece-move 240ms cubic-bezier(0.2, 0.9, 0.15, 1);
+}
+
+.piece-pop {
+  animation: piece-pop 180ms ease-out;
+}
+
+@keyframes piece-move {
+  from {
+    transform: translate(var(--move-start-x), var(--move-start-y)) scale(0.94);
+    opacity: 0.65;
+  }
+
+  to {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes piece-pop {
+  from {
+    transform: scale(0.75);
+    opacity: 0.1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 920px) {
+  .app {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 16px 0 24px;
+  }
+
+  .board-section {
+    order: 1;
+  }
+
+  .panel {
+    order: 2;
+  }
+
+  .board {
+    width: min(94vw, 560px);
+  }
+}

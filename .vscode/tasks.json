@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Git: Status",
+      "type": "shell",
+      "command": "git status --short --branch",
+      "problemMatcher": []
+    },
+    {
+      "label": "Workspace: List Files",
+      "type": "shell",
+      "command": "Get-ChildItem -Force",
+      "problemMatcher": []
+    }
+  ]
+}
